@@ -2,7 +2,7 @@
   <ion-title>CHART TEST</ion-title>
 </ion-navbar>
 
-<ion-content padding class="page1">
+<ion-content>
   <base-chart class="chart"
               [data]="lineChartData"
               [labels]="lineChartLabels"
@@ -13,4 +13,8 @@
               [chartType]="lineChartType"
               (chartHover)="chartHovered($event)"
               (chartClick)="chartClicked($event)"></base-chart>
+
+  <button (click)="randomize()">
+    Randomize
+  </button>
 </ion-content>
