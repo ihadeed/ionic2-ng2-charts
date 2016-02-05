@@ -1,5 +1,6 @@
 import {Page} from 'ionic-framework/ionic';
-import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
+import {CHART_DIRECTIVES} from './charts';
+//import {CHART_DIRECTIVES} from "ng2-charts/ng2-charts";
 
 @Page({
   templateUrl: 'build/pages/page1/page1.html',
@@ -8,8 +9,51 @@ import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
 export class Page1 {
   constructor() {
 
+    this.lineChartColours = this.getColours(['#FF9800','#49cd97','#ef2e0a']);
+
+    console.log(this.getColours(['#FF9800','#49cd97','#ef2e0a']));
+
   }
 
+  rgba (colour, alpha) {
+    return 'rgba(' + colour.concat(alpha).join(',') + ')';
+  }
+
+  hexToRgb (hex) {
+    var bigint = parseInt(hex.substr(1), 16),
+        r = (bigint >> 16) & 255,
+        g = (bigint >> 8) & 255,
+        b = bigint & 255;
+    console.log("Hex is " + hex, "Big int is ", bigint);
+
+    return [r, g, b];
+  }
+
+  convertColour (colour) {
+  if (typeof colour === 'object' && colour !== null) return colour;
+  if (typeof colour === 'string' && colour[0] === '#') return this.getColour(this.hexToRgb(colour.substr(1)));
+  }
+
+  getColour (colour) {
+    return {
+      fillColor: this.rgba(colour, 0.2),
+      strokeColor: this.rgba(colour, 1),
+      pointColor: this.rgba(colour, 1),
+      pointStrokeColor: '#fff',
+      pointHighlightFill: '#fff',
+      pointHighlightStroke: this.rgba(colour, 0.8)
+    };
+  }
+
+  getColours (colours) {
+    let _clrs = [];
+    colours.forEach(
+        color => {
+          _clrs.push(this.getColour(this.hexToRgb(color)));
+        }
+    );
+    return _clrs;
+  }
 
   // lineChart
   private lineChartData:Array<any> = [
@@ -24,32 +68,8 @@ export class Page1 {
     responsive: true,
     multiTooltipTemplate: '<%if (datasetLabel){%><%=datasetLabel %>: <%}%><%= value %>'
   };
-  private lineChartColours:Array<any> = [
-    { // grey
-      fillColor: 'rgba(148,159,177,0.2)',
-      strokeColor: 'rgba(148,159,177,1)',
-      pointColor: 'rgba(148,159,177,1)',
-      pointStrokeColor: '#fff',
-      pointHighlightFill: '#fff',
-      pointHighlightStroke: 'rgba(148,159,177,0.8)'
-    },
-    { // dark grey
-      fillColor: 'rgba(77,83,96,0.2)',
-      strokeColor: 'rgba(77,83,96,1)',
-      pointColor: 'rgba(77,83,96,1)',
-      pointStrokeColor: '#fff',
-      pointHighlightFill: '#fff',
-      pointHighlightStroke: 'rgba(77,83,96,1)'
-    },
-    { // grey
-      fillColor: 'rgba(148,159,177,0.2)',
-      strokeColor: 'rgba(148,159,177,1)',
-      pointColor: 'rgba(148,159,177,1)',
-      pointStrokeColor: '#fff',
-      pointHighlightFill: '#fff',
-      pointHighlightStroke: 'rgba(148,159,177,0.8)'
-    }
-  ];
+  //'#FF9800','#49cd97','#ef2e0a'
+  private lineChartColours:Array<any>;
   private lineChartLegend:boolean = true;
   private lineChartType:string = 'Line';
 
