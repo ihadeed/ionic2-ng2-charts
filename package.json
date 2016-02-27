@@ -12,9 +12,15 @@
   },
   "devDependencies": {
     "awesome-typescript-loader": "0.15.10",
+    "cz-conventional-changelog": "^1.1.5",
     "strip-sourcemap-loader": "0.0.1",
     "typescript": "1.7.5"
   },
   "name": "charttest",
-  "description": "charttest: An Ionic project"
+  "description": "charttest: An Ionic project",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }
