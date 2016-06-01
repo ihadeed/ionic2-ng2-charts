@@ -6,4 +6,4 @@
 - You can run `serve` or `run` on your device of choice.
 
 ## Demo
-![demo](https://github.com/ihadeed/ionic2-ng2charts/blob/master/ezgif-3553611927.1.gif?raw=true)
+![demo](https://github.com/ihadeed/charttest/blob/master/ezgif-3553611927.1.gif?raw=true)
